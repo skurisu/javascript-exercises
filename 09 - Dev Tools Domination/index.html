@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+  <!-- select element in inspector, right click and break on > attributes modifications.  will add debugger to find js -->
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log('hello');
+
+    // Interpolated
+    console.log('Hello I am a %s string!', 'TONI');
+
+    // Styled
+    console.log("'%c I'm so awesome", "font-size: 50px; background-color: yellow'");
+
+    // warning!
+    console.warn('Oh no!'); // warning + stack trace
+
+    // Error :|
+    console.error('Error!'); // logs error message + stack trace
+
+    // Info
+    console.info('Random fun fact here'); // info icon in console
+
+    // Testing
+    console.assert(1 === 1, 'that is wrong!'); // won't fire because statement is true
+    console.assert(1 === 2, 'that is wrong!') // will fire because statement is false
+
+    const p = document.querySelector('p');
+
+    console.assert(p.classList.contains('something'), 'That is wrong!');
+    // test for false values
+
+    // clearing
+    console.clear();
+
+    // Viewing DOM Elements
+    console.log(p);
+    console.dir(p); // allow you to open up element
+
+    console.clear();
+    // Grouping together
+    dogs.forEach(dog => {
+      console.group(`${dog.name}`) // or use groupCollapsed
+      console.log(`this is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.groupEnd(`${dog.name}`);
+    });
+
+    // counting
+    console.count('Toni');
+    console.count('Toni');
+    console.count('Ellie');
+    console.count('Ellie');
+    console.count('Toni');
+    console.count('Toni');
+    console.count('Ellie')
+    console.count('Ellie')
+
+    // timing
+    console.time('fetching data');
+    fetch('https://api.github.com/users/skurisu')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+        console.log(data);
+      })
+
+    // table
+    console.table(dogs) // assuming all objects have same properties, will display table
+    
+  </script>
+</body>
+</html>
